@@ -34,7 +34,7 @@ public class JpaMain {
             // DELETE
 //            em.remove(findMember);*/
 
-            /*// 비영속
+           /* // 비영속
             Member member = new Member();
             member.setId(101L);
             member.setName("HelloJPA");
@@ -73,14 +73,15 @@ public class JpaMain {
 
             System.out.println("=================");*/
 
-            Member member = em.find(Member.class, 150L);
+            /*Member member = em.find(Member.class, 150L);
             member.setName("AAAAA");
 
 //            em.detach(member);
             em.clear();
 
             Member member2 = em.find(Member.class, 150L);
-            System.out.println("================");
+            System.out.println("================");*/
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
