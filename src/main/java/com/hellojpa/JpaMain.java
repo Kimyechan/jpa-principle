@@ -62,10 +62,16 @@ public class JpaMain {
 
             System.out.println("==================");*/
 
-            // Dirty Checking - 변경 감지
+            /*// Dirty Checking - 변경 감지
             Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZZZ");
+            member.setName("ZZZZZZZ");*/
 
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+
+            em.flush(); // persistence context 와 DB를 동기화, persistence context를 비우지 않음
+
+            System.out.println("=================");
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
