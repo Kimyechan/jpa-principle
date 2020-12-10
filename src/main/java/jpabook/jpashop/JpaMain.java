@@ -1,5 +1,8 @@
 package jpabook.jpashop;
 
+import com.hellojpa.Member;
+import com.hellojpa.Team;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -15,7 +18,6 @@ public class JpaMain {
 
         tx.begin();
         try {
-
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
