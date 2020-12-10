@@ -103,9 +103,12 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+            member.changeTeam(team); // 항상 양 객체에 둘 다 추가해주자
             em.persist(member);
 
+            // 항상 양 객체에 둘 다 추가해주자
+//            team.getMembers().add(member);
+//            team.addMember(member);
             em.flush();
             em.clear();
 
@@ -114,9 +117,18 @@ public class JpaMain {
             Team findTeam = findMember.getTeam();
             System.out.println("findTeam = " + findTeam.getName());
 
-            // 팀 변경
-            Team newTeam = em.find(Team.class, 100L);
-            findMember.setTeam(newTeam);
+            // 무한 루프
+//            System.out.println(findTeam);
+
+//            // 팀 변경
+//            Team newTeam = em.find(Team.class, 100L);
+//            findMember.setTeam(newTeam);
+
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e) {
