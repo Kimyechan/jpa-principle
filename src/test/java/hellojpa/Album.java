@@ -1,8 +1,8 @@
-package com.hellojpa;
+package hellojpa;
 
 import javax.persistence.Entity;
 
 @Entity
-public class Album extends Item{
+public class Album extends Item {
     private String artist;
 }
