@@ -1,7 +1,6 @@
-package com.hellojpa;
+package hellojpa;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

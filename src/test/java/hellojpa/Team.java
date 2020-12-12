@@ -1,4 +1,4 @@
-package com.hellojpa;
+package hellojpa;
 
 import javax.persistence.*;
 import java.util.ArrayList;
