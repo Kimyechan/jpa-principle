@@ -1,6 +1,6 @@
-package jpabook.jpashop;
+package com.jpabook.jpashop;
 
-import jpabook.jpashop.domain.Book;
+import com.jpabook.jpashop.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
