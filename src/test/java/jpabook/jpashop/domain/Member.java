@@ -1,4 +1,4 @@
-package com.jpabook.jpashop.domain;
+package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
