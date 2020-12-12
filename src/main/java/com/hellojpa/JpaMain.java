@@ -18,12 +18,35 @@ public class JpaMain {
 
         tx.begin();
         try {
+            /*Address address = new Address("city", "street", "10");
+
             Member member = new Member();
             member.setUsername("member1");
-            member.setAddress(new Address("city", "street", "10"));
-            member.setWordPeriod(new Period());
-
+            member.setAddress(address);
             em.persist(member);
+
+            Address address1 = new Address(address.getCity(), address.getStreet(), address.getZipcode());
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setHomeAddress(address1);
+            em.persist(member2);
+
+            //
+//            member.getAddress().setCity("newCity"); // 값 타입 setter 없애기*/
+
+
+            //
+            Address address = new Address("city", "street", "10");
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setAddress(address);
+            em.persist(member);
+
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
+            member.setAddress(newAddress);
+
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();

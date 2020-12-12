@@ -2,11 +2,12 @@ package com.hellojpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
