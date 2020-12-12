@@ -23,6 +23,7 @@ public class JpaMain {
             Member member = new Member();
             member.setAge(10);
             member.setUsername("member1");
+            member.setType(MemberType.ADMIN);
 
             member.changeTeam(team);
 
@@ -31,12 +32,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-//            String query = "select m from Member m inner join m.team t";
-//            String query = "select m from Member m left outer join m.team t";
-//            String query = "select m from Member m, Team t where m.username = t.name";
-//            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
-            String query = "select m from Member m left join Team t on m.username = t.name";
-            List<Member> result = em.createQuery(query, Member.class)
+//            String query = "select m.username, 'HELLO', TRUE from Member m where m.type = com.jpql.MemberType.ADMIN";
+            String query = "select m.username, 'HELLO', TRUE from Member m where m.type = :userType";
+
+            List<Object[]> result = em.createQuery(query)
+                    .setParameter("userType", MemberType.ADMIN)
                     .getResultList();
 
             System.out.println("result.size = " + result.size());
