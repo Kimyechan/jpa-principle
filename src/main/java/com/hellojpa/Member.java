@@ -1,11 +1,15 @@
 package com.hellojpa;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
-public class Member extends BaseEntity {
+public class Member{
     @Id
     @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -31,42 +35,30 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
+    // 기간
+    @Embedded
+    private Period wordPeriod;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Embedded
+    private Address homeAddress;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /*public Long getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
-    }*/
-
-    public Team getTeam() {
-        return team;
-    }
+    // 주소
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+                    column = @Column(name = "WORK_CITY")),
+            @AttributeOverride(name="street",
+                    column = @Column(name = "WORK_STREET")),
+            @AttributeOverride(name="zipcode",
+                    column = @Column(name = "WORK_ZIPCODE"))
+    })
+    private Address address;
 
     public void changeTeam(Team team) {
         this.team = team;
         team.getMembers().add(this); // 양 객체에 추가시키는 방법
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 
     @Override
     public String toString() {
