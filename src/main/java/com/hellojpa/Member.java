@@ -5,7 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -53,6 +55,19 @@ public class Member{
                     column = @Column(name = "WORK_ZIPCODE"))
     })
     private Address address;
+
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMEBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    /*@ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMEBER_ID"))
+    private List<Address> addressesHistory = new ArrayList<>();*/
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMEBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
     public void changeTeam(Team team) {
         this.team = team;
