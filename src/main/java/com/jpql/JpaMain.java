@@ -32,16 +32,9 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-//            String query =
-//                    "select " +
-//                            "case when m.age <= 10 then '학생요금' " +
-//                            "     when m.age >= 60 then '경로요금' " +
-//                            "     else '일반요금' " +
-//                            "end " +
-//                    "from Member m";
-
-//            String query = "select coalesce(m.username, '이름 없는 회원') from Member m";
-            String query = "select nullif(m.username, '관리자') from Member m";
+//            String query = "select concat('a', 'b') from Member m";
+//            String query = "select substring(m.username, 2, 3) from Member m";
+            String query = "select size(t.members) from Team t";
             List<String> result = em.createQuery(query, String.class)
                     .getResultList();
 
