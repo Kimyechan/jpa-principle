@@ -46,21 +46,19 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-//            String query = "select m From Member m"; // -> N + 1
-//            String query = "select t From Team t join fetch t.members"; // 중복된 데이터 발생한다
-//            String query = "select distinct t From Team t join fetch t.members"; // 중복제거
-//            String query = "select m From Member m join m.team "; // 일반 조인 member data만 가지고 온다. team이 로딩되지 않는다
-            String query = "select m From Member m join fetch m.team";
-            List<Member> result = em.createQuery(query, Member.class)
+            String query = "select t From Team t";
+            List<Team> result = em.createQuery(query, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
                     .getResultList();
 
-            for (Member member : result) {
-                System.out.println("member = " + member.getUsername() + ", " + member.getTeam().getName());
-                //회원1, 팀A(SQL)
-                //회원2, 팀A(1차 캐시)
-                //회원3, 팀B(SQL)
+            System.out.println("result = " + result.size());
 
-                //회원 100명 -> N + 1
+            for (Team team : result) {
+                System.out.println("team = " + team.getName() + "| members = " + team.getMembers());
+                for (Member member : team.getMembers()) {
+                    System.out.println("-> member = " + member);
+                }
             }
             tx.commit();
         } catch (Exception e) {
