@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Collection;
 import java.util.List;
 
 public class JpaMain {
@@ -32,15 +33,18 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-//            String query = "select concat('a', 'b') from Member m";
-//            String query = "select substring(m.username, 2, 3) from Member m";
-            String query = "select size(t.members) from Team t";
-            List<String> result = em.createQuery(query, String.class)
-                    .getResultList();
+//            String query = "select m.username from Member m";
+//            String query = "select m.team.name from Member m";
+//            String query = "select t.members.size from Team t";
+            String query = "select m.username from Team t join t.members m";
+//            List<String> result = em.createQuery(query, String.class)
+//                    .getResultList();
+            String result = em.createQuery(query, String.class)
+                    .getSingleResult();
 
-            for (String s: result) {
-                System.out.println("s = " + s);
-            }
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
 
             tx.commit();
         } catch (Exception e) {
